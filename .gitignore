@@ -2,3 +2,4 @@
 *.elf
 s2e-last
 s2e-out-*
+tmp
