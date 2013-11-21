@@ -27,4 +27,4 @@ clean: logclean
 	rm -f *.bin *.elf *.o
 
 logclean:
-	rm -Rf s2e-last s2e-out-*
+	rm -Rf s2e-last s2e-out-* tmp
