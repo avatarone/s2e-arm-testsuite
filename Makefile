@@ -17,7 +17,7 @@ build:
 	$(foreach dir,$(TARGETS),$(MAKE) -C $(dir) build;)
 
 check: build
-	S2E=$(S2E_QEMU) cucumber -q
+	S2E=$(S2E_QEMU) cucumber -q && $(MAKE) clean
 
 .PHONY: run debug
 run: $(TARGETS)
