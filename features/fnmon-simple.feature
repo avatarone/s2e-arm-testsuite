@@ -18,19 +18,6 @@ Feature: Monitors - ARMFunctionMonitor
         And the stdout should contain "State 1"
         And the stdout should not contain "State 2"
 
-    Scenario: Sum results state 0
-        Then the stdout should contain:
-        """
-        [State 0] State was terminated by opcode
-                    message: ""
-                    status: 0x9
-        """
-
-
-    Scenario: Sum result state 1
-        Then the stdout should contain:
-        """
-        [State 1] State was terminated by opcode
-                    message: ""
-                    status: 0x2
-        """
+    Scenario: Two different sum results
+        Then the stdout should contain "status: 0x2"
+            And the stdout should contain "status: 0x9"
