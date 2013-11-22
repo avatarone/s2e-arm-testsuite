@@ -25,7 +25,7 @@ run: $(TARGETS)
 	@echo -e '\n--> Run `make logclean` to remove all output dirs \n'
 
 debug: $(TARGET)
-	$(foreach bin,$^,echo $(bin); gdbserver localhost:1222 $(S2E_QEMU) -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);)
+	$(foreach bin,$^,echo $(bin); gdbserver localhost:10000 $(S2E_QEMU) -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);)
 	@echo -e '\n--> Run `make logclean` to remove all output dirs \n'
 
 .PHONY: clean logclean

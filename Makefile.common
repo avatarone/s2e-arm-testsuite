@@ -6,7 +6,6 @@ LDFLAGS += -Ttext=0x0  -nostdlib -nostdinc
 CFLAGS += -march=armv5te -Wall -O0
 
 .SECONDARY:
-
 %.arm.S.elf: %.arm.S
 	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -marm -o $@ $^ ../../include/s2earm-inst.S
 
@@ -21,6 +20,16 @@ CFLAGS += -march=armv5te -Wall -O0
 
 %.bin: %.elf
 	$(OBJCOPY) -O binary $< $@
+
+.PHONY: run debug
+run: $(TARGETS)
+	$(foreach bin,$^,echo $(bin); $(S2E_QEMU) -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);)
+	@echo -e '\n--> Run `make logclean` to remove all output dirs \n'
+
+debug: $(TARGETS)
+	$(foreach bin,$^,echo $(bin); gdbserver localhost:10000 $(S2E_QEMU) -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);)
+	@echo -e '\n--> Run `make logclean` to remove all output dirs \n'
+
 
 .PHONY: clean
 clean: logclean
