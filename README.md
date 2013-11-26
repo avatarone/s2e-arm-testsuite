@@ -9,8 +9,8 @@ Running tests
 Tests contains mini-firmwares written in C or ASM for ARM 
 architecture (both thumb and arm modes); in order to compile them 
 you need an ARM cross-compiler. We currently use and suggest the 
-```gcc-4.7-arm-linux-gnueabi```  available in 
-[emdebian](http://www.emdebian.org/tools/crosstools.html).
+```gcc-4.7-arm-none-eabi``` available from
+[linaro](https://launchpad.net/gcc-arm-embedded/4.7/4.7-2013-q1-update).
 
 We use Cucumber and Aruba as test-runners, so you need to install them 
 before starting the checks:

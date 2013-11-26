@@ -3,6 +3,7 @@ S2E_QEMU ?= ~/build/build/qemu-debug/arm-s2e-softmmu/qemu-system-arm
 TARGETS = \
 		tests/annotations \
 		tests/arm-core \
+		tests/armeb-core \
 		tests/monitors \
 		tests/bugfix \
 		tests/arbexec \

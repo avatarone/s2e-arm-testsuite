@@ -1,22 +1,28 @@
-TOOLS_PREFIX ?= arm-linux-gnueabi-
-CROSS_CC ?= $(TOOLS_PREFIX)gcc-4.7
+TOOLS_PREFIX ?= arm-none-eabi-
+CROSS_CC ?= $(TOOLS_PREFIX)gcc
 OBJCOPY ?= $(TOOLS_PREFIX)objcopy
 S2E_QEMU ?= ~/build/build/qemu-debug/arm-s2e-softmmu/qemu-system-arm
 LDFLAGS += -Ttext=0x0  -nostdlib -nostdinc
-CFLAGS += -march=armv5te -Wall -O0
+CFLAGS += -Wall -O0
 
 .SECONDARY:
 %.arm.S.elf: %.arm.S
-	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -marm -o $@ $^ ../../include/s2earm-inst.S
+	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -marm -march=armv5te -o $@ $^ ../../include/s2earm-inst.S
 
 %.arm.c.elf: %.arm.c
-	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -marm -o $@ $^ ../../include/s2earm-inst.S
+	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -marm -march=armv5te -o $@ $^ ../../include/s2earm-inst.S
 
 %.thumb.S.elf: %.thumb.S
-	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -mthumb -o $@ $^ ../../include/s2earm-inst.S
+	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -mthumb -march=armv5te -o $@ $^ ../../include/s2earm-inst.S
 
 %.thumb.c.elf: %.thumb.c
-	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -mthumb -o $@ $^ ../../include/s2earm-inst.S
+	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -mthumb -march=armv5te -o $@ $^ ../../include/s2earm-inst.S
+
+%.armeb.S.elf: %.armeb.S
+	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -marm -mbig-endian -march=armv7-r -o $@ $^
+
+%.armeb.c.elf: %.armeb.c
+	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -marm -mbig-endian -march=armv7-r -o $@ $^
 
 %.bin: %.elf
 	$(OBJCOPY) -O binary $< $@
