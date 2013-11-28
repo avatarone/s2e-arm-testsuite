@@ -10,8 +10,8 @@ Feature: Core ARM support - CPU flags
     Scenario: Set all flags to 0 (0x0)
         Then the stdout should contain:
         """
-        SymbExpression Flagtest:  - 0xf0000000
-        SymbExpression Flagtest:  - Value: 0xf0000000
+        SymbExpression Flagtest:  - 0x0
+        SymbExpression Flagtest:  - Value: 0x0
         """
 
     Scenario: Set all flags to 1 (0xF)
