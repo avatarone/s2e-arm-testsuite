@@ -54,7 +54,7 @@ s2e_kill_state:
 .type s2e_print_expression, %function
 .global s2e_print_expression
 @requires r0: expression number
-@requires r1: address to symbolic name
+@requires r2: address to symbolic name
 s2e_print_expression:
     stmfd sp!,{r14}
     .word 0xFF070000

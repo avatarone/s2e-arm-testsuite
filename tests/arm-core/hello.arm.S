@@ -131,7 +131,7 @@ test_forking:
 	bl s2e_get_path_id
 	mov r5, r0
 
-	adr r1, labelreg5
+	adr r2, labelreg5
 	bl s2e_print_expression
 
 
@@ -149,7 +149,7 @@ compareMem:
 	sub r4, r4, #8
 
 	mov r0, r4
-	adr r1, adrafter
+	adr r2, adrafter
 	bl s2e_print_expression
 
 
@@ -186,7 +186,7 @@ test_mem:
 	mov r9, r9, lsl r6	@shift by ram_object_bits to get the size of the page
 stm0:
 	mov r0, r7		    @print counter
-	adr r1, cnt		@name
+	adr r2, cnt		@name
 	bl s2e_print_expression
 
 	cmp r7,#1     @the number represents the number of cycles in stm0
@@ -223,7 +223,7 @@ stm1:
 	add r5, #10	
 
 	mov r0, r9		@expression argument (r9 contains pagesize)
-	adr r1, val			@name
+	adr r2, val			@name
 	bl s2e_print_expression
 	mov r4, #1048576 @ starting memory address 0x100000
 stm2_restart:
@@ -274,7 +274,7 @@ _exit:
 	adr r1, testok
 	bl s2e_kill_state
 sterr:
-	adr r1, membadval
+	adr r2, membadval
 	bl s2e_print_expression
 	mov r0, r5
 	adr r1, membad
