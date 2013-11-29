@@ -1,0 +1,34 @@
+{
+    "init_state": [
+        {
+            "r0": 8436240,
+            "r1": 8406160,
+            "r2": 804063,
+            "r3": 8460296,
+            "r4": 804732,
+            "r5": 8406136,
+            "r6": 8406160,
+            "r7": 8427056
+        }
+    ],
+    "cpu_model": "arm926",
+    "endianness": "big",
+    "devices": [],
+    "memory_map": [
+        {
+            "map": [
+                {
+                    "permissions": "rwx",
+                    "type": "code",
+                    "address": 0
+                }
+            ],
+            "name": "test_firmware",
+            "file": "./bigendian-base.armeb.S.bin",
+            "size": 4096
+        }
+    ],
+    "architecture": "arm",
+    "entry_address": 0
+}
+
