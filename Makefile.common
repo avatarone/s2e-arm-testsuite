@@ -1,7 +1,8 @@
 TOOLS_PREFIX ?= arm-none-eabi-
 CROSS_CC ?= $(TOOLS_PREFIX)gcc
 OBJCOPY ?= $(TOOLS_PREFIX)objcopy
-S2E_QEMU ?= ~/build/build/qemu-debug/arm-s2e-softmmu/qemu-system-arm
+S2E_QEMU_BE ?= ~/build/build/qemu-debug/armeb-softmmu/qemu-system-armeb
+S2E_QEMU_LE ?= ~/build/build/qemu-debug/arm-s2e-softmmu/qemu-system-arm
 LDFLAGS += -Ttext=0x0  -nostdlib -nostdinc
 CFLAGS += -Wall -O0
 
@@ -29,11 +30,17 @@ CFLAGS += -Wall -O0
 
 .PHONY: run debug
 run: $(TARGETS)
-	$(foreach bin,$^,echo $(bin); $(S2E_QEMU) -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);)
+	$(foreach bin,$^, \
+		$(if $(findstring armeb,$(bin)), \
+			echo $(bin); $(S2E_QEMU_BE) -M configurable -m 4M -kernel $(bin).json $(EXTRA);, \
+			echo $(bin); $(S2E_QEMU_LE) -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);))
 	@echo -e '\n--> Run `make logclean` to remove all output dirs \n'
 
 debug: $(TARGETS)
-	$(foreach bin,$^,echo $(bin); gdbserver localhost:10000 $(S2E_QEMU) -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);)
+	$(foreach bin,$^, \
+		$(if $(findstring armeb,$(bin)), \
+			echo $(bin); gdbserver localhost:10000 $(S2E_QEMU_BE) -M configurable -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin).json $(EXTRA);), \
+			echo $(bin); gdbserver localhost:10000 $(S2E_QEMU_LE) -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);))
 	@echo -e '\n--> Run `make logclean` to remove all output dirs \n'
 
 

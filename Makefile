@@ -21,13 +21,11 @@ check: build
 	S2E=$(S2E_QEMU) cucumber -q && $(MAKE) clean
 
 .PHONY: run debug
-run: $(TARGETS)
-	$(foreach bin,$^,echo $(bin); $(S2E_QEMU) -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);)
-	@echo -e '\n--> Run `make logclean` to remove all output dirs \n'
+run:
+	$(foreach dir,$(TARGETS),$(MAKE) -C $(dir) run;)
 
 debug: $(TARGET)
-	$(foreach bin,$^,echo $(bin); gdbserver localhost:10000 $(S2E_QEMU) -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);)
-	@echo -e '\n--> Run `make logclean` to remove all output dirs \n'
+	$(foreach dir,$(TARGETS),$(MAKE) -C $(dir) debug;)
 
 .PHONY: clean logclean
 clean: logclean
