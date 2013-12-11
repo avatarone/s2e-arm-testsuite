@@ -28,7 +28,7 @@ CFLAGS += -Wall -O0
 %.bin: %.elf
 	$(OBJCOPY) -O binary $< $@
 
-.PHONY: run debug
+.PHONY: run debug rdebug
 run: $(TARGETS)
 	$(foreach bin,$^, \
 		$(if $(findstring armeb,$(bin)), \
@@ -39,10 +39,16 @@ run: $(TARGETS)
 debug: $(TARGETS)
 	$(foreach bin,$^, \
 		$(if $(findstring armeb,$(bin)), \
-			echo $(bin); gdbserver localhost:10000 $(S2E_QEMU_BE) -M configurable -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin).json $(EXTRA);), \
-			echo $(bin); gdbserver localhost:10000 $(S2E_QEMU_LE) -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);))
+			echo $(bin); gdb --args $(S2E_QEMU_BE) -M configurable -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin).json $(EXTRA);, \
+			echo $(bin); gdb --args $(S2E_QEMU_LE) -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);))
 	@echo -e '\n--> Run `make logclean` to remove all output dirs \n'
 
+rdebug: $(TARGETS)
+	$(foreach bin,$^, \
+		$(if $(findstring armeb,$(bin)), \
+			echo $(bin); gdbserver localhost:10000 $(S2E_QEMU_BE) -M configurable -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin).json $(EXTRA);, \
+			echo $(bin); gdbserver localhost:10000 $(S2E_QEMU_LE) -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);))
+	@echo -e '\n--> Run `make logclean` to remove all output dirs \n'
 
 .PHONY: clean
 clean: logclean

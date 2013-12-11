@@ -20,12 +20,15 @@ build:
 check: build
 	S2E=$(S2E_QEMU) cucumber -q && $(MAKE) clean
 
-.PHONY: run debug
+.PHONY: run debug rdebug
 run:
 	$(foreach dir,$(TARGETS),$(MAKE) -C $(dir) run;)
 
 debug: $(TARGET)
 	$(foreach dir,$(TARGETS),$(MAKE) -C $(dir) debug;)
+
+rdebug: $(TARGET)
+	$(foreach dir,$(TARGETS),$(MAKE) -C $(dir) rdebug;)
 
 .PHONY: clean logclean
 clean: logclean
