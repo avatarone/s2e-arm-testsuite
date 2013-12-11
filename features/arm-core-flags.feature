@@ -3,7 +3,7 @@ Feature: Core ARM support - CPU flags
 
     Background:
         Given current test directory at "tests/arm-core"
-        Given S2E config file named "base-flags.config.lua"
+        Given S2E config file named "base-flags_test.arm.S.bin-config.lua"
         Given ARM firmware named "base-flags_test.arm.S.bin"
         When S2E test is run
 
