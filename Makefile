@@ -8,7 +8,8 @@ TARGETS = \
 		tests/bugfix \
 		tests/arbexec \
 		tests/symbolic \
-		tests/s2e-opcodes
+		tests/s2e-opcodes \
+		tests/AnnotationMemoryInterceptor
 
 .SECONDARY:
 
