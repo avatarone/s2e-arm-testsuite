@@ -30,7 +30,11 @@ void _start() {
 
   unsigned a = *((unsigned int *) 0x900);
   unsigned b = *((unsigned int *) 0x900);
-  if (a != 42 || b != 13)
+  
+  *((volatile unsigned int *) 0x908) = 0x42;
+  unsigned int c = *((volatile unsigned int *) 0x908);
+  
+  if (a != 42 || b != 13 || c != 0x42)
   {
      s2e_kill_state(1, "ERROR: no values for address 0x900 injected");
   }
