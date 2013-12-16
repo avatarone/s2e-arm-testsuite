@@ -18,6 +18,11 @@ Feature: Annotations - Check that intercepting memory reads works
 
     Scenario: Write annotation is invoked
         Then the stdout should contain "write interception annotation called with address = 0x00000900, size = 4, value = 0x0000002a, is_io = false"
+        And the file "s2e-last/debug.txt" should contain "[MemoryInterceptor] slotMemoryWrite called with address = 0x900 [concrete], access_type = 0xaa, is_io = 0"
+
+    Scenario: Write annotation is not invoked for not selected memory ranges
+        Then the stdout should not contain "write interception annotation called with address = 0x00000908, size = 4, value = 0x0000000d, is_io = false"
+        And the file "s2e-last/debug.txt" should contain "[MemoryInterceptor] slotMemoryWrite called with address = 0x908 [concrete], access_type = 0xaa, is_io = 0"
 
     Scenario: Memory values are read by code inside virtual machine
         Then the stdout should contain "OK: Values 13 and 42 were read after write"

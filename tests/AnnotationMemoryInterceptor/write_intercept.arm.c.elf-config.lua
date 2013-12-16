@@ -24,7 +24,9 @@ plugins = {
 
 pluginsConfig = {
   Annotation = {},
-  MemoryInterceptor = {},
+  MemoryInterceptor = {
+      verbose = true
+  },
   MemoryInterceptorAnnotation = {
       interceptors = {
           first_interceptor = {

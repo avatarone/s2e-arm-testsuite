@@ -30,8 +30,10 @@ void _start() {
 
   volatile unsigned* a = (unsigned int *) 0x900;
   volatile unsigned* b = (unsigned int *) 0x904;
+  volatile unsigned* c = (volatile unsigned int *) 0x908;
   
   *a = 42;
+  *c = 13;
   
   if (*a != 13 || *b != 42)
   {
