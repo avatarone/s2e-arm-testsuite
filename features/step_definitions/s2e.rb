@@ -19,5 +19,13 @@ end
 
 When /^S2E test is run$/ do
     @cmd = @s2e_cmd + " -M integratorcp -cpu cortex-a8 -m 4M -s2e-config-file " + @luacfg + " -s2e-verbose -kernel " + @bin
-    run_simple(unescape(@cmd), false)
+    run(unescape(@cmd), 30)
+end
+
+When(/^test program "(.*?)" is run after ([0-9]+?) seconds$/) do |cmd, time|
+    @waittime = time
+    @shellcmd = cmd
+   
+    sleep(@waittime.to_i()) 
+    run(unescape(@shellcmd), 30)
 end
