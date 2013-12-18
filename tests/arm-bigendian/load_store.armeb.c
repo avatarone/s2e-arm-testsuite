@@ -95,6 +95,55 @@ __attribute__((__naked__)) static int test_load_be8(void)
     return 0;
 }
 
+__attribute__((__naked__)) static int test_store(void)
+{
+    asm(
+      "mov r1,     #0xde000000   \n"
+      "orr r1, r1, #0x00ad0000    \n"
+      "orr r1, r1, #0x0000be00    \n"
+      "orr r1, r1, #0x000000ef    \n"
+      "str r1, test_store_const   \n"
+      "ldrb r2, test_store_const  \n"
+      "lsr r3, r1, #24       \n"
+      "cmp r2, r3            \n"
+      "movne r0, #0          \n"
+      "bxne  lr              \n"
+      
+      "ldrb r2, test_store_const+1  \n"
+      "lsr r3, r1, #16       \n"
+      "and r3, r3, #0xff     \n"
+      "cmp r2, r3            \n"
+      "movne r0, #0          \n"
+      "bxne  lr              \n"
+      
+      "ldrh r2, test_store_const+2  \n"
+      "mov r0, #0xff         \n"
+      "orr r0, r0, #0xff00   \n"
+      "and r3, r1, r0        \n"
+      "cmp r2, r3            \n"
+      "movne r0, #0          \n"
+      "bxne  lr              \n"
+      
+      "strh r1, test_store_const   \n"
+      "ldrb r2, test_store_const+1  \n"
+      "cmp r2, #0xef         \n"
+      "movne r0, #0          \n"
+      "bxne  lr              \n"
+      
+      "strb r1, test_store_const   \n"
+      "ldrb r2, test_store_const  \n"
+      "cmp r2, #0xef         \n"
+      "movne r0, #0          \n"
+      "bxne  lr              \n"
+      
+      "mov r0, #1          \n"
+      "bx  lr                \n"
+      "test_store_const:     \n"
+      ".long 0xdeadbeef   \n");
+    
+    /* Not used, just to satisfy compiler */
+    return 0;
+}
 
 void _start() {
   
@@ -134,6 +183,39 @@ void _start() {
       s2e_message("OK: BE8 load test passed");
   else
       s2e_message("ERROR: BE8 load test failed");
+  
+  if (test_store())
+      s2e_message("OK: store test passed");
+  else
+      s2e_message("ERROR: store test failed");
+  
+  /* Todo: tests in symbolic mode with concrete values, tests with symbolic values */
+  s2e_enable_symbolic();
+  
+  if (test_load_int32())
+      s2e_message("OK: 32-bit constant load test in symbolic mode passed");
+  else
+      s2e_message("ERROR: 32-bit constant load test in symbolic mode failed");
+  
+  if (test_load_int16())
+      s2e_message("OK: 16-bit constant load test in symbolic mode passed");
+  else
+      s2e_message("ERROR: 16-bit constant load test in symbolic mode failed");
+  
+  if (test_load_int8())
+      s2e_message("OK: 8-bit constant load test in symbolic mode passed");
+  else
+      s2e_message("ERROR: 8-bit constant load test in symbolic mode failed");
+  
+  if (test_load_be8())
+      s2e_message("OK: BE8 load test in symbolic mode passed");
+  else
+      s2e_message("ERROR: BE8 load test in symbolic mode failed");
+  
+  if (test_store())
+      s2e_message("OK: store test in symbolic mode passed");
+  else
+      s2e_message("ERROR: store test in symbolic mode failed");
   
   
   s2e_kill_state(0, "Done");
