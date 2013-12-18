@@ -23,7 +23,7 @@ CFLAGS += -Wall -O0
 	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -marm -mbig-endian -march=armv7-r -o $@ $^
 
 %.armeb.c.elf: %.armeb.c
-	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -marm -mbig-endian -march=armv7-r -o $@ $^
+	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -marm -mbig-endian -march=armv7-r -o $@ $^ ../../include/s2earm-inst.S
 
 %.bin: %.elf
 	$(OBJCOPY) -O binary $< $@

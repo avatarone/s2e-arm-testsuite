@@ -22,6 +22,13 @@ When /^S2E test is run$/ do
     run(unescape(@cmd), 30)
 end
 
+When(/^S2E test is run for architecture "(.*?)"$/) do |arch|
+    @s2e_dir = File.dirname(File.dirname(@s2e_cmd))
+    @s2e_arch_cmd = File.join(@s2e_dir, arch + "-s2e-softmmu", "qemu-system-" + arch)
+    @cmd = @s2e_arch_cmd + " -M integratorcp -cpu cortex-a8 -m 4M -s2e-config-file " + @luacfg + " -s2e-verbose -kernel " + @bin
+    run(unescape(@cmd), 30)
+end
+
 When(/^test program "(.*?)" is run after ([0-9]+?) seconds$/) do |cmd, time|
     @waittime = time
     @shellcmd = cmd
