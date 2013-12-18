@@ -10,7 +10,8 @@ TARGETS = \
 		tests/symbolic \
 		tests/s2e-opcodes \
 		tests/AnnotationMemoryInterceptor \
-		tests/RemoteMemory
+		tests/RemoteMemory \
+		tests/arm-bigendian
 
 .SECONDARY:
 
