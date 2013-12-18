@@ -9,7 +9,8 @@ TARGETS = \
 		tests/arbexec \
 		tests/symbolic \
 		tests/s2e-opcodes \
-		tests/AnnotationMemoryInterceptor
+		tests/AnnotationMemoryInterceptor \
+		tests/RemoteMemory
 
 .SECONDARY:
 
