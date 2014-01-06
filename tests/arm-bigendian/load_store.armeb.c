@@ -2,12 +2,16 @@
  * workflow by overwriting the pc.
  */
 
-
 // baremetal entry point
 void _start() __attribute__((naked));
 
-int sum(int, int);
+typedef unsigned long long uint64_t;
+
 extern void s2e_kill_state(int status, const char* message);
+extern void s2e_enable_symbolic();
+extern void s2e_make_symbolic(void * address, unsigned size, const char* name);
+extern uint64_t s2e_get_sample(void* address, unsigned size);
+extern void s2e_message(const char* msg);
 
 __attribute__((__naked__)) static int test_load_int32(void)
 {
