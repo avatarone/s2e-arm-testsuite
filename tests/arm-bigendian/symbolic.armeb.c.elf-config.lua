@@ -17,6 +17,8 @@ s2e = {
 plugins = {
   -- Enable a plugin that handles S2E custom opcode
   "BaseInstructions",
+  "ExecutionTracer",
+  "TestCaseGenerator"           
 }
 
 pluginsConfig = {

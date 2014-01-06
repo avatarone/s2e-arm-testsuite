@@ -6,46 +6,48 @@
 // baremetal entry point
 void _start() __attribute__((naked));
 
-typedef unsigned long long uint64_t;
+typedef unsigned long uint64_t;
+typedef unsigned uint32_t;
 
 extern void s2e_kill_state(int status, const char* message);
 extern void s2e_enable_symbolic();
 extern void s2e_make_symbolic(void * address, unsigned size, const char* name);
-extern uint64_t s2e_get_example(void* address, unsigned size);
+extern void s2e_get_example(void* address, unsigned size);
 extern void s2e_message(const char* msg);
+extern void s2e_print_memory(void* address, unsigned size, const char* name);
 
 void check_symbolic()
 {
-  unsigned long x = 0;
+  uint32_t x = 0;
   
   s2e_enable_symbolic();
 
   //Make memory value symbolic and load it in a register
   s2e_make_symbolic(&x, sizeof(x), "symbolic_test");
   
-  if (x < 42)
+  if (x != 42)
   {
-	  uint64_t sample = s2e_get_example(&x, sizeof(x));
-	  if (sample < 42)
+	  s2e_get_example(&x, sizeof(x));
+	  if (x != 42)
 	  {
-	  	  s2e_kill_state(0, "OK: sample < 42");
+	  	  s2e_kill_state(0, "OK: sample != 42");
 	  }
 	  else
 	  {
-	  	s2e_kill_state(0, "ERROR: not sample < 42");
+	  	s2e_kill_state(0, "ERROR: not sample != 42");
 	  }
   	   
   }
   else
   {
-  	  uint64_t sample = s2e_get_example(&x, sizeof(x));
-	  if (sample >= 42)
+  	  s2e_get_example(&x, sizeof(x));
+	  if (x == 42)
 	  {
-	  	  s2e_kill_state(0, "OK: sample >= 42");
+	  	  s2e_kill_state(0, "OK: sample == 42");
 	  }
 	  else
 	  {
-	  	s2e_kill_state(0, "ERROR: not sample >= 42");
+	  	s2e_kill_state(0, "ERROR: not sample == 42");
 	  }
   }
 }
