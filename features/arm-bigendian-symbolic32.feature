@@ -2,8 +2,8 @@ Feature: Check if symbolic execution creates the right constraints for big endia
 
     Background:
         Given current test directory at "tests/arm-bigendian"
-        Given S2E config file named "symbolic.armeb.c.elf-config.lua"
-        Given ARM firmware named "symbolic.armeb.c.elf"
+        Given S2E config file named "symbolic_uint32.armeb.c.elf-config.lua"
+        Given ARM firmware named "symbolic_uint32.armeb.c.elf"
         When S2E test is run for architecture "armeb"
 
     Scenario: Both branches are executed and the symbolic value is correctly converted to a concrete
