@@ -18,14 +18,14 @@ Given(/^ARM firmware named "(.*?)"$/) do |fw|
 end
 
 When /^S2E test is run$/ do
-    @cmd = @s2e_cmd + " -M integratorcp -cpu cortex-a8 -m 4M -s2e-config-file " + @luacfg + " -s2e-verbose -kernel " + @bin
+    @cmd = @s2e_cmd + " -nographic -M integratorcp -cpu cortex-a8 -m 4M -s2e-config-file " + @luacfg + " -s2e-verbose -kernel " + @bin
     run(unescape(@cmd), 30)
 end
 
 When(/^S2E test is run for architecture "(.*?)"$/) do |arch|
     @s2e_dir = File.dirname(File.dirname(@s2e_cmd))
     @s2e_arch_cmd = File.join(@s2e_dir, arch + "-s2e-softmmu", "qemu-system-" + arch)
-    @cmd = @s2e_arch_cmd + " -M integratorcp -cpu cortex-a8 -m 4M -s2e-config-file " + @luacfg + " -s2e-verbose -kernel " + @bin
+    @cmd = @s2e_arch_cmd + " -nographic -M integratorcp -cpu cortex-a8 -m 4M -s2e-config-file " + @luacfg + " -s2e-verbose -kernel " + @bin
     run(unescape(@cmd), 30)
 end
 
