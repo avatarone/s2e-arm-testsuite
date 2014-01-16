@@ -32,22 +32,22 @@ CFLAGS += -Wall -O0
 run: $(TARGETS)
 	$(foreach bin,$^, \
 		$(if $(findstring armeb,$(bin)), \
-			echo $(bin); $(S2E_QEMU_BE) -M configurable -m 4M -kernel $(bin).json $(EXTRA);, \
-			echo $(bin); $(S2E_QEMU_LE) -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);))
+			echo $(bin); $(S2E_QEMU_BE) -monitor /dev/null -nographic -M configurable -m 4M -kernel $(bin).json $(EXTRA);, \
+			echo $(bin); $(S2E_QEMU_LE) -monitor /dev/null -nographic -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);))
 	@echo -e '\n--> Run `make logclean` to remove all output dirs \n'
 
 debug: $(TARGETS)
 	$(foreach bin,$^, \
 		$(if $(findstring armeb,$(bin)), \
-			echo $(bin); gdb --args $(S2E_QEMU_BE) -M configurable -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin).json $(EXTRA);, \
-			echo $(bin); gdb --args $(S2E_QEMU_LE) -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);))
+			echo $(bin); gdb --args $(S2E_QEMU_BE) -monitor /dev/null -nographic -M configurable -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin).json $(EXTRA);, \
+			echo $(bin); gdb --args $(S2E_QEMU_LE) -monitor /dev/null -nographic -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);))
 	@echo -e '\n--> Run `make logclean` to remove all output dirs \n'
 
 rdebug: $(TARGETS)
 	$(foreach bin,$^, \
 		$(if $(findstring armeb,$(bin)), \
-			echo $(bin); gdbserver localhost:10000 $(S2E_QEMU_BE) -M configurable -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin).json $(EXTRA);, \
-			echo $(bin); gdbserver localhost:10000 $(S2E_QEMU_LE) -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);))
+			echo $(bin); gdbserver localhost:10000 $(S2E_QEMU_BE) -monitor /dev/null  -nographic -M configurable -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin).json $(EXTRA);, \
+			echo $(bin); gdbserver localhost:10000 $(S2E_QEMU_LE) -monitor /dev/null -nographic -M integratorcp -m 4M -s2e-config-file $(bin)-config.lua -s2e-verbose -kernel $(bin) $(EXTRA);))
 	@echo -e '\n--> Run `make logclean` to remove all output dirs \n'
 
 .PHONY: clean
