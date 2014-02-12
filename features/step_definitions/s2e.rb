@@ -18,15 +18,25 @@ Given(/^ARM firmware named "(.*?)"$/) do |fw|
 end
 
 When /^S2E test is run$/ do
-    @cmd = @s2e_cmd + " -nographic -M integratorcp -cpu cortex-a8 -m 4M -s2e-config-file " + @luacfg + " -s2e-verbose -kernel " + @bin
-    run(unescape(@cmd), 30)
+    if system "test $(uname) != \"Darwin\""
+	@monitor = " -monitor /dev/null"
+    else
+        @monitor = ""
+    end
+    @cmd = @s2e_cmd + " -nographic -M integratorcp -cpu cortex-a8 -m 4M -s2e-config-file " + @luacfg + " -s2e-verbose -kernel " + @bin + @monitor
+    run(unescape(@cmd), @aruba_timeout_seconds)
 end
 
 When(/^S2E test is run for architecture "(.*?)"$/) do |arch|
+    if system "test $(uname) != \"Darwin\""
+	@monitor = " -monitor /dev/null"
+    else
+        @monitor = ""
+    end
     @s2e_dir = File.dirname(File.dirname(@s2e_cmd))
     @s2e_arch_cmd = File.join(@s2e_dir, arch + "-s2e-softmmu", "qemu-system-" + arch)
-    @cmd = @s2e_arch_cmd + " -nographic -M integratorcp -cpu cortex-a8 -m 4M -s2e-config-file " + @luacfg + " -s2e-verbose -kernel " + @bin
-    run(unescape(@cmd), 30)
+    @cmd = @s2e_arch_cmd + " -nographic -M integratorcp -cpu cortex-a8 -m 4M -s2e-config-file " + @luacfg + " -s2e-verbose -kernel " + @bin + @monitor
+    run(unescape(@cmd), @aruba_timeout_seconds)
 end
 
 When(/^test program "(.*?)" is run after ([0-9]+?) seconds$/) do |cmd, time|
@@ -34,5 +44,5 @@ When(/^test program "(.*?)" is run after ([0-9]+?) seconds$/) do |cmd, time|
     @shellcmd = cmd
    
     sleep(@waittime.to_i()) 
-    run(unescape(@shellcmd), 30)
+    run(unescape(@shellcmd), @aruba_timeout_seconds)
 end

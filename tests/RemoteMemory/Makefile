@@ -1,3 +1,9 @@
-include ../../Makefile.common
+.SECONDARY:
+TARGETS ?= \
+	remote_memory.arm.c.bin \
+	bugfix_tight_loop.arm.S.bin
 
-build: remote_memory.arm.c.elf
+all: build
+build: $(TARGETS)
+
+include ../../Makefile.common
