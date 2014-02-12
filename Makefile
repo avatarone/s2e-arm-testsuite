@@ -11,7 +11,8 @@ TARGETS = \
 		tests/s2e-opcodes \
 		tests/AnnotationMemoryInterceptor \
 		tests/RemoteMemory \
-		tests/arm-bigendian
+		tests/arm-bigendian \
+		tests/IdentifyMemoryRegionsPlugin
 
 .SECONDARY:
 
