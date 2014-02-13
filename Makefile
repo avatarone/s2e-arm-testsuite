@@ -12,7 +12,8 @@ TARGETS = \
 		tests/AnnotationMemoryInterceptor \
 		tests/RemoteMemory \
 		tests/arm-bigendian \
-		tests/IdentifyMemoryRegionsPlugin
+		tests/IdentifyMemoryRegionsPlugin \
+		tests/ControlFlowGraphPlugin
 
 .SECONDARY:
 
