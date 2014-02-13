@@ -39,7 +39,7 @@ pluginsConfig = {
   }
 }
 
-function ann_write_intercept(state, plg, address, size, value, is_io)
+function ann_write_intercept(plg, state, address, size, value, is_io)
     io.write(string.format("write interception annotation called with address = 0x%08x, size = %d, value = 0x%08x, is_io = %s\n", address, size, value, tostring(is_io)))
     if address == 0x900 and size == 4 then
         plg:writeMemory(0x900, 4, 13)

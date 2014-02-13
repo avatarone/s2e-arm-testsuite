@@ -39,7 +39,7 @@ pluginsConfig = {
   }
 }
 
-function ann_read_intercept(state, plg, address, size, is_io, is_code)
+function ann_read_intercept(plg, state, address, size, is_io, is_code)
     local call_nr = state:getValue("call_nr")
     state:setValue("call_nr", call_nr + 1)
     io.write(string.format("%d: address = 0x%x, size = 0x%x, is_io = %s, is_code = %s\n", call_nr, address, size, tostring(is_io), tostring(is_code)))

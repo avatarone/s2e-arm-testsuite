@@ -42,7 +42,7 @@ pluginsConfig = {
   }
 }
 
-function ann_read_intercept(state, plg, address, size, is_io, is_code)
+function ann_read_intercept(plg, state, address, size, is_io, is_code)
     io.write(string.format("read interception annotation called with address = 0x%x, size = 0x%x, is_io = %s, is_code = %s\n", address, size, tostring(is_io), tostring(is_code)))
     
     if address == 0x900 and size == 4 then
