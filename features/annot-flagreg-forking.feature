@@ -7,9 +7,7 @@ Feature: Annotations - Check making a flag register symbolic
         When S2E test is run
 
 
-    Scenario: Check exit status
+    Scenario: Check state forking
         Then the stdout should contain "status: 0x1"
-
-    Scenario: Check exit status
-        Then the stdout should contain "status: 0x2"
-
+        And the stdout should contain "status: 0x2"
+		And the stdout should contain "Forking state 0 at pc = 0x10034"
