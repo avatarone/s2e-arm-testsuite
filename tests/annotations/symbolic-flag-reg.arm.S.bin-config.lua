@@ -58,7 +58,7 @@ pluginsConfig = {
     }
   },
   Annotation = {
-    myann = {
+    myann0 = {
       module  = "main",
       active  = true,
       address = 0x10030,
@@ -66,7 +66,7 @@ pluginsConfig = {
       beforeInstruction = true,
       switchInstructionToSymbolic = true,
 	  --paramcount = 1,
-    }
+    },
   }
 }
 
@@ -74,4 +74,3 @@ function mark_flag_symbolic (state, plg)
 	-- print("HitHitHitHitHitHitHitHitHitHitHitHit")
 	state:setFlagSymb("ZF")
 end
-

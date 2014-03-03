@@ -21,11 +21,11 @@ _main:
 
 test_cases:
 	bl s2e_enable_forking
-	b test_flag_Z
-	mov r0, #3
+	bl test_flag_Z_symbolic
+	mov r0, #10
 	b _exit
 
-test_flag_Z:
+test_flag_Z_symbolic:
 
 	movs r1, #0x0
 	/* zero flag should be one,
@@ -37,6 +37,6 @@ test_flag_Z:
 	mov r0, #1
 	b _exit
 __flag_Z_set:
-	mov r0, #2
-	b _exit
-
+	# normal execution
+	# return from function and continue
+	mov pc, lr

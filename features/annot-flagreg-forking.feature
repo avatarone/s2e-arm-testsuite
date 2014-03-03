@@ -9,5 +9,5 @@ Feature: Annotations - Check making a flag register symbolic
 
     Scenario: Check state forking
         Then the stdout should contain "status: 0x1"
-        And the stdout should contain "status: 0x2"
 		And the stdout should contain "Forking state 0 at pc = 0x10034"
+
