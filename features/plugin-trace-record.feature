@@ -10,6 +10,8 @@ Feature: Test Record and Replay plugin (Record)
 		Then the file "s2e-last/debug.txt" should not contain "Creating plugin ReplayMemoryAccess"
 		And the file "s2e-last/debug.txt" should contain "Creating plugin ExecutionTracer"
 		And the file "s2e-last/debug.txt" should contain "Creating plugin MemoryTracer"
+		And the file "s2e-last/debug.txt" should contain "Creating plugin Annotation"
+		And the file "s2e-last/debug.txt" should contain "Creating plugin MemoryInterceptorAnnotation"
 
 	Scenario: Values are intercepted
 		Then the file "s2e-last/debug.txt" should contain "OK: Terminated"
