@@ -1,6 +1,6 @@
 .SECONDARY:
 TARGETS ?= \
-	record.arm.c.elf \
+	record-replay.arm.c.elf \
 
 all: build
 build: $(TARGETS)

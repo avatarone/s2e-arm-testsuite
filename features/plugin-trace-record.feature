@@ -3,7 +3,7 @@ Feature: Test Record and Replay plugin (Record)
 	Background:
 		Given current test directory at "tests/trace"
 		Given S2E config file named "record.arm.c.elf-config.lua"
-		Given ARM firmware named "record.arm.c.elf"
+		Given ARM firmware named "record-replay.arm.c.elf"
 		When S2E test is run
 
 	Scenario: Plugins are loaded
