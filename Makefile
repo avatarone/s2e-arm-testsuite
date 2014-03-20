@@ -13,7 +13,8 @@ TARGETS = \
 		tests/RemoteMemory \
 		tests/arm-bigendian \
 		tests/IdentifyMemoryRegionsPlugin \
-		tests/ControlFlowGraphPlugin
+		tests/ControlFlowGraphPlugin \
+		tests/SnapshotPlugin
 
 .SECONDARY:
 
