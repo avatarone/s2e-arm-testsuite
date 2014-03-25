@@ -54,7 +54,7 @@ pluginsConfig = {
 		  active  = true,
 		  -- Annotation cannot be on the first basic block after module loading, thus insert an artificial beq .+4 in
 		  -- the beginning of the test
-		  address = 0x44,
+		  address = 0x5c,
 		  beforeInstruction = true,
 		  switchInstructionToSymbolic = false,
 		  instructionAnnotation = "ann_snapshot",
@@ -64,5 +64,5 @@ pluginsConfig = {
 
 function ann_snapshot(state, plg)
 	print("Snapshot annotation called")
-	Snapshot.takeSnapshot("testname", 0x3)
+	Snapshot.takeSnapshot("testname", 0x7, {{address = 0x1000, size = 0x20000}})
 end
