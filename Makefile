@@ -15,6 +15,7 @@ TARGETS = \
 		tests/IdentifyMemoryRegionsPlugin \
 		tests/ControlFlowGraphPlugin \
 		tests/SnapshotPlugin
+		tests/trace
 
 .SECONDARY:
 

@@ -1,5 +1,6 @@
 Given /^current test directory at "(.*?)"$/ do |dir|
     cd(dir)
+	@test_dir = dir
 end
 
 Given /^S2E binary at "(.*?)"$/ do |cmd|
@@ -45,4 +46,19 @@ When(/^test program "(.*?)" is run after ([0-9]+?) seconds$/) do |cmd, time|
    
     sleep(@waittime.to_i()) 
     run(unescape(@shellcmd), @aruba_timeout_seconds)
+end
+
+Then(/^then trace "(.*?)" should contain the same memory accesses as the trace "(.*?)"$/) do |first_file, second_file|
+	check_file_presence([first_file], true)
+	check_file_presence([second_file], true)
+
+	traceentry_to_string_file = "../memtrace/DisplayMemoryEntries.py"
+	first_file_dat_path = @test_dir + "/" + first_file
+	second_file_dat_path = @test_dir + "/" + second_file
+	first_file_txt_path = first_file_dat_path + "-text"
+	second_file_txt_path = second_file_dat_path + "-text"
+
+	assert_success(system("python " + " " + traceentry_to_string_file + " " + first_file_dat_path + " > " + first_file_txt_path))
+	assert_success(system("python " + " " + traceentry_to_string_file + " " + second_file_dat_path + " > " + second_file_txt_path))
+	assert_success(system("diff " + second_file_txt_path + " " + first_file_txt_path))
 end
