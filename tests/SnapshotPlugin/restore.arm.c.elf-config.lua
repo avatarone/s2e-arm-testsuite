@@ -23,11 +23,6 @@ plugins = {
 pluginsConfig = {
 	Snapshot = {
 		verbose = true,
-		restore = "testname.snapshot"
+		restore_file = "testname.snapshot"
 	},
 }
-
-function ann_snapshot(state, plg)
-	print("Snapshot annotation called")
-	Snapshot.takeSnapshot("testname")
-end

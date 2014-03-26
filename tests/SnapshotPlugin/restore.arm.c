@@ -41,8 +41,21 @@ void _start() {
 	  "cmpeq r5, r12          \n"
 	  "ldr r12, =0xb19b00b5   \n"
 	  "cmpeq r6, r12          \n"
-	  "moveq %[result], #0           \n"
-	  "movne %[result], #1           \n" : [result] "=r" (result)
+	  "movne %[result], #1    \n"
+	  "bne finished           \n"
+	  "ldr r0, =0x1000        \n"
+	  "ldr r1, =0x10000       \n"
+	  "loop_start:            \n"
+	  "ldr r2, [r0]           \n"
+	  "cmp r2, r0             \n"
+	  "movne %[result], #1    \n"
+	  "bne finished           \n"
+	  "add r0, r0, #4         \n"
+	  "cmp r0, r1             \n"
+	  "ble loop_start         \n"
+	  "mov %[result], #0      \n"
+	  "finished:              \n" : [result] "=r" (result)
+	  
   );
   
   if (result)  {
