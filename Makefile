@@ -14,8 +14,9 @@ TARGETS = \
 		tests/arm-bigendian \
 		tests/IdentifyMemoryRegionsPlugin \
 		tests/ControlFlowGraphPlugin \
-		tests/SnapshotPlugin
-		tests/trace
+		tests/SnapshotPlugin \
+		tests/trace \
+		tests/ConcolicValues
 
 .SECONDARY:
 

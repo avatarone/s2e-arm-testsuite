@@ -91,6 +91,15 @@ s2e_message:
     stmfd sp!,{r14}
     .word 0xFF100000
     ldmfd sp!,{r15}
+	
+.type s2e_make_concolic, %function
+.global s2e_make_concolic
+@requires r0 The address of the memory that will be made concolic
+@requires r1 Size of the concolic expression
+@requires r2 Pointer to name of concolic expression
+s2e_make_concolic:
+    .word 0xFF110000
+	bx lr
 
 .type s2e_concretize, %function
 .global s2e_concretize
