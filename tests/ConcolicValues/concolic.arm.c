@@ -2,14 +2,11 @@
  * workflow by overwriting the pc.
  */
 
+#include "s2e_arm_base_instructions.h"
+
 
 // baremetal entry point
 void _start() __attribute__((naked));
-
-extern void s2e_kill_state(int status, const char* message);
-extern void s2e_make_concolic(unsigned char *address, unsigned width, const char* name);
-extern void s2e_enable_symbolic();
-extern void s2e_disable_forking();
 
 void _start() {
   

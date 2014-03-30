@@ -4,14 +4,17 @@ OBJCOPY ?= $(TOOLS_PREFIX)objcopy
 S2E_QEMU_BE ?= ~/build/build/qemu-debug/armeb-softmmu/qemu-system-armeb
 S2E_QEMU_LE ?= ~/build/build/qemu-debug/arm-s2e-softmmu/qemu-system-arm
 LDFLAGS += -Ttext=0x0  -nostdlib -nostdinc
-CFLAGS += -Wall -O0
+CFLAGS += -Wall -O0 -I../../include
 
 .SECONDARY:
 %.arm.S.elf: %.arm.S
 	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -marm -march=armv5te -o $@ $^ ../../include/s2earm-inst.S
 
-%.arm.c.elf: %.arm.c
-	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -marm -march=armv5te -o $@ $^ ../../include/s2earm-inst.S
+s2e_base_instructions.arm.o: ../../include/s2e_arm_base_instructions.h
+	$(CROSS_CC) $(CFLAGS) -marm -march=armv5te -x c -DWITH_DEFINITIONS -Wno-return-type -c -o $@ $^
+	
+%.arm.c.elf: %.arm.c s2e_base_instructions.arm.o
+	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -marm -march=armv5te -o $@ $^
 
 %.thumb.S.elf: %.thumb.S
 	$(CROSS_CC) $(CFLAGS) $(LDFLAGS) -mthumb -march=armv5te -o $@ $^ ../../include/s2earm-inst.S
