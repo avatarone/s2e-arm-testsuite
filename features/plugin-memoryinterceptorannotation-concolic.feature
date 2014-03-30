@@ -13,6 +13,6 @@ Feature: Annotations - Check that returning concolic value works
 		And the output should not contain "Result = 0"
 		And the output should contain:
 		"""
-		status: (Add w32 (w32 0x42)
-		         (ReadLSB w32 0x0 v1_test_1))
+		Constraint: (Eq (w32 0xcafebabe)
+		    (ReadLSB w32 0x0 v1_test_1))
 		"""

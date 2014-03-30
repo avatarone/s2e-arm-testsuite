@@ -40,7 +40,11 @@ pluginsConfig = {
               read_handler = "ann_read_intercept"
           }
       }
+  },
+  TestCaseGenerator = {
+	  print_constraints = true
   }
+	  
 }
 
 function ann_read_intercept(plg, state, address, size, is_io, is_code)
