@@ -21,4 +21,7 @@ plugins = {
 }
 
 pluginsConfig = {
+	TestCaseGenerator = {
+		print_constraints = true
+	}
 }
