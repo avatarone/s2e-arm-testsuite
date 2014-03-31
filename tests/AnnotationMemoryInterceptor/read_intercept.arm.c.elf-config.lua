@@ -19,7 +19,9 @@ plugins = {
   "BaseInstructions",
   "MemoryInterceptor",
   "Annotation",
-  "MemoryInterceptorAnnotation"
+  "MemoryInterceptorAnnotation",
+  "ModuleExecutionDetector",
+  "RawMonitor",
 }
 
 pluginsConfig = {

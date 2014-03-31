@@ -22,7 +22,9 @@ plugins = {
   "MemoryInterceptorAnnotation",
 --  "InstructionPrinter",
   "ExecutionTracer",
-  "TestCaseGenerator"
+  "TestCaseGenerator",
+  "RawMonitor",
+  "ModuleExecutionDetector",
 }
 
 pluginsConfig = {
