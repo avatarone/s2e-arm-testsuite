@@ -79,3 +79,16 @@ Then(/^then trace "(.*?)" should contain all the memory accesses from trace "(.*
 	ret = system("test 0 -eq `diff -w " + second_file_txt_path + " " + first_file_txt_path + " | grep -c -e '^<'`")
 	assert_success(ret)
 end
+
+Then(/^an invocation of "(.*?)" with the file "(.*?)" should print:$/) do |executable, file, expected|
+  check_file_presence([file], true)
+  $stderr.puts(@test_dir + "/" + executable + " " + @test_dir + "/" + file)
+  prg = open("|" + @test_dir + "/" + executable + " " + @test_dir + "/" + file)
+  prg_output = prg.read
+  prg.close
+  
+  expected.strip!
+  prg_output.strip!
+
+  assert_exact_output(expected, prg_output)
+end
