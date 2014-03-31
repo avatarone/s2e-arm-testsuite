@@ -13,7 +13,7 @@ Feature: Test IdentifyMemoryRegions plugin
         Then the file "s2e-last/memory_regions.csv" should contain:
             """
             0x00000000, 0x00000100, code+rodata
-            0x00000100, 0x00000080, rodata
+            0x00000100, 0x00000040, rodata
             0x00000f40, 0x00000100, stack
             0x00010000, 0x00000080, rodata
             0x00010080, 0x00000040, data
