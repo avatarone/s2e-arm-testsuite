@@ -8,7 +8,7 @@ s2e = {
     -- switching to the other:
     "--use-batching-search=true", 
     "--batch-time=1.0",
-    "--use-concolic-execution=true"
+    "--use-concolic-execution=false"
   }
 }
 
@@ -21,6 +21,7 @@ plugins = {
   "ExecutionTracer",
   "RawMonitor",
   "ReplayMemoryAccesses",
+  "InstructionPrinter",
 }
 
 pluginsConfig = {
@@ -29,6 +30,7 @@ pluginsConfig = {
 	},
 	ReplayMemoryAccesses = {
 		verbose = true,
+		insertSymbol = false,
 		replayTraceFileName = "ExecutionTracer.dat-recorded",
 		ranges = {
 			some_of_the_memory = {
