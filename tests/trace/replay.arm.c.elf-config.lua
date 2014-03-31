@@ -31,12 +31,12 @@ pluginsConfig = {
 		verbose = true,
 		replayTraceFileName = "ExecutionTracer.dat-recorded",
 		ranges = {
-			all_the_memory = {
-				address = 0x0,
-				size = 0xffffffff,
+			some_of_the_memory = {
+				address = 0x10000,
+				size = 0x1000,
 				access_type = {"write", "read", "concrete_address", "concrete_value"},
-			}
-		}
+			},
+		},
 	},
 	MemoryTracer = {
 		monitorMemory = true,
