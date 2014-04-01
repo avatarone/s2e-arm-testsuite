@@ -16,7 +16,8 @@ TARGETS = \
 		tests/ControlFlowGraphPlugin \
 		tests/SnapshotPlugin \
 		tests/trace \
-		tests/ConcolicValues
+		tests/ConcolicValues \
+		tests/ConcolicForkTracerPlugin \
 
 .SECONDARY:
 
