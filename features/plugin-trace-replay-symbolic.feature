@@ -26,15 +26,15 @@ Feature: Test Record and Replay plugin (Replay Symbols)
 
 	Scenario: Constraints are printed for third var
 		Then the file "s2e-last/debug.txt" should contain "SymbExpression third_var_not_zero - (Add w32 (w32 0x20)"
-		And the file "s2e-last/debug.txt" should contain "(ZExt w32 (Read w8 0x0 v2_replay_symbolic_@0x0000009c_2)))"
+		And the file "s2e-last/debug.txt" should match /ZExt w32 \(Read w8 0x0 v2_replay_symbolic_@0x[0-9a-fA-F]+_2\)\)\)/
 		And the file "s2e-last/debug.txt" should contain "SymbExpression third_var_not_zero - Value: 0x33"
 
 	Scenario: Constraints are printed for second var
 		Then the file "s2e-last/debug.txt" should contain "SymbExpression second_var - (Add w32 (w32 0x21)"
-		And the file "s2e-last/debug.txt" should contain "(ZExt w32 (ReadLSB w16 0x0 v1_replay_symbolic_@0x00000058_1)))"
+		And the file "s2e-last/debug.txt" should match /\(ZExt w32 \(ReadLSB w16 0x0 v1_replay_symbolic_@0x[0-9a-fA-F]+_1\)\)\)/
 		And the file "s2e-last/debug.txt" should contain "SymbExpression second_var - Value: 0xbadf"
 
 	Scenario: Constraints are printed for the first var
-		Then the file "s2e-last/debug.txt" should contain "SymbExpression first_var - (Shl w32 (ReadLSB w32 0x0 v0_replay_symbolic_@0x00000024_0)"
+		Then the file "s2e-last/debug.txt" should match /SymbExpression first_var - \(Shl w32 \(ReadLSB w32 0x0 v0_replay_symbolic_@0x[0-9a-fA-F]+_0\)/
 		And the file "s2e-last/debug.txt" should contain "(w32 0x5))"
 		And the file "s2e-last/debug.txt" should contain "SymbExpression first_var - Value: 0xd5b7dde0"
