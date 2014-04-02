@@ -30,10 +30,10 @@ pluginsConfig = {
 	},
 	ReplayMemoryAccesses = {
 		verbose = true,
-		insertSymbol = false,
 		replayTraceFileName = "ExecutionTracer.dat-recorded",
 		ranges = {
 			some_of_the_memory = {
+				replayConcolic = false,
 				address = 0x10000,
 				size = 0x1000,
 				access_type = {"write", "read", "concrete_address", "concrete_value"},
