@@ -32,8 +32,6 @@ void _start() {
   
   *address = 0x42;
   
-  s2e_enable_forking();
-  s2e_enable_symbolic();
   s2e_make_concolic((unsigned char *)address, sizeof(unsigned long), "blubb");
   
   asm volatile
