@@ -21,4 +21,4 @@ Feature: Test Record and Replay plugin (Record)
 			| s2e-last/ExecutionTracer.dat |
 
 	Scenario: The trace file contains the transactions
-		Then then trace "s2e-last/ExecutionTracer.dat" should contain all the memory accesses from trace "ExecutionTracer.dat-recorded"
+		Then the trace "s2e-last/ExecutionTracer.dat" should contain all the memory accesses from trace "ExecutionTracer.dat-recorded"

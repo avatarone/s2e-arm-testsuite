@@ -48,7 +48,7 @@ When(/^test program "(.*?)" is run after ([0-9]+?) seconds$/) do |cmd, time|
     run(unescape(@shellcmd), @aruba_timeout_seconds)
 end
 
-Then(/^then trace "(.*?)" should contain the same memory accesses as the trace "(.*?)"$/) do |first_file, second_file|
+Then(/^the trace "(.*?)" should contain the same memory accesses as the trace "(.*?)"$/) do |first_file, second_file|
 	check_file_presence([first_file], true)
 	check_file_presence([second_file], true)
 
@@ -63,7 +63,7 @@ Then(/^then trace "(.*?)" should contain the same memory accesses as the trace "
 	assert_success(system("diff " + second_file_txt_path + " " + first_file_txt_path))
 end
 
-Then(/^then trace "(.*?)" should contain all the memory accesses from trace "(.*?)"$/) do |first_file, second_file|
+Then(/^the trace "(.*?)" should contain all the memory accesses from trace "(.*?)"$/) do |first_file, second_file|
 	check_file_presence([first_file], true)
 	check_file_presence([second_file], true)
 
