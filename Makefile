@@ -18,6 +18,7 @@ TARGETS = \
 		tests/trace \
 		tests/ConcolicValues \
 		tests/ConcolicForkTracerPlugin \
+		tests/ExecutionTracerPlugin \
 
 .SECONDARY:
 
