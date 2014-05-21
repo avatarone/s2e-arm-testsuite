@@ -33,11 +33,16 @@ class ConcolicTraceFile():
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("tracefile", type = str, metavar = "FILE", help = "Concolic fork trace file")
+    parser.add_argument("--show-pc", action = "store_true", dest = "show_pc", default = False,
+        help = "Show Program Counter")
     args = parser.parse_args()
     
     trace_file = ConcolicTraceFile(args.tracefile)
     for record in trace_file.read_all():
-        print("killed_state_id = %d, condition = \"%s\"" % (record["killed_state_id"], " ".join(record["condition"].split())))
+        if args.show_pc:
+            print("pc = 0x%08x, killed_state_id = %d, condition = \"%s\"" % (record["pc"], record["killed_state_id"], " ".join(record["condition"].split())))
+        else:
+            print("killed_state_id = %d, condition = \"%s\"" % (record["killed_state_id"], " ".join(record["condition"].split())))
 
 if __name__ == "__main__":
     main()
