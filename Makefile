@@ -1,4 +1,4 @@
-S2E_QEMU ?= ~/build/build/qemu-debug/arm-s2e-softmmu/qemu-system-arm
+QEMU_S2E ?= ~/build/build/qemu-debug/arm-s2e-softmmu/qemu-system-arm
 
 TARGETS = \
 		tests/annotations \
@@ -28,7 +28,7 @@ build:
 	$(foreach dir,$(TARGETS),$(MAKE) -C $(dir) build;)
 
 check: build
-	S2E=$(S2E_QEMU) cucumber -q && $(MAKE) clean
+	S2E=$(QEMU_S2E) cucumber -q && $(MAKE) clean
 
 .PHONY: run debug rdebug
 run:

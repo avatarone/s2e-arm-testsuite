@@ -9,7 +9,8 @@ s2e = {
     -- switching to the other:
     "--use-batching-search=true", 
     "--batch-time=1.0",
-    "--use-concolic-execution=true"
+--    "--use-concolic-execution=true"
+    "--print-mode-switch=true"
     
   }
 }
@@ -22,6 +23,9 @@ plugins = {
   "MemoryInterceptorAnnotation",
   "ModuleExecutionDetector",
   "RawMonitor",
+  "ExecutionTracer",
+  "InstructionTracer",
+  "MemoryTracer"
 }
 
 pluginsConfig = {
@@ -30,6 +34,7 @@ pluginsConfig = {
       verbose = true
   },
   MemoryInterceptorAnnotation = {
+      verbose = true,
       interceptors = {
           first_interceptor = {
               address = 0x900,
